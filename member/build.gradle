@@ -1,0 +1,54 @@
+if (rootProject.ext.isAppliction){
+    apply plugin: 'com.android.application'
+}else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+
+    defaultConfig {
+        if (rootProject.ext.isAppliction){
+            applicationId "com.liukun.member"
+        }
+        minSdkVersion  rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.version.versionCode
+        versionName rootProject.ext.version.versionName
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets{
+        main{
+            if (rootProject.ext.isAppliction){
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }else {
+                manifest.srcFile 'src/main/mainfest/AndroidManifest.xml'
+            }
+        }
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    def dependencies = rootProject.ext.dependencies
+    implementation dependencies.appcompat
+    implementation dependencies.constraintlayout
+    testImplementation dependencies.junit
+    androidTestImplementation  dependencies.extjunit
+    androidTestImplementation dependencies.espresso
+    implementation project(path: ':arouter')
+    implementation project(path: ':annotation')
+    annotationProcessor project(path: ':annotation_complier')
+}
