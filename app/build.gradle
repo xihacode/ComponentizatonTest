@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.liukun.componentizatontest"
-        minSdkVersion  rootProject.ext.android.minSdkVersion
+        minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.version.versionCode
         versionName rootProject.ext.version.versionName
@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 
 }
 
@@ -30,12 +34,12 @@ dependencies {
     implementation dependencies.appcompat
     implementation dependencies.constraintlayout
     testImplementation dependencies.junit
-    androidTestImplementation  dependencies.extjunit
+    androidTestImplementation dependencies.extjunit
     androidTestImplementation dependencies.espresso
     implementation project(path: ':arouter')
     implementation project(path: ':annotation')
     annotationProcessor project(path: ':annotation_complier')
-    if (!rootProject.ext.isAppliction){
+    if (!rootProject.ext.isAppliction) {
         implementation project(path: ':login')
         implementation project(path: ':member')
     }

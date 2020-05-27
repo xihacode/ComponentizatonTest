@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void jumpActivity(View view) {
-        Toast.makeText(this,"ssss",Toast.LENGTH_LONG).show();
         ARouter.getInstance().jumpActivity("login/login", null);
     }
 }
